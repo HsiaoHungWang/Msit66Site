@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewData["Title"] = "First";
+}
+
+<h1>First Ajax</h1>
+<button id="buttonStart" class="btn btn-primary">Ajax 開始</button>
+<div id="divMessage"></div>
+
+@section Scripts{
+    <script>
+        const btnStart = document.querySelector('#buttonStart');
+        const divMsg = document.querySelector('#divMessage');
+        const apiUrl = 'https://localhost:7194/api/First/text';
+
+        btnStart.addEventListener('click',()=>{
+            //step3 串接API
+            //alert('click')
+            console.log(fetch(apiUrl));
+
+        })
+    </script>
+}
+

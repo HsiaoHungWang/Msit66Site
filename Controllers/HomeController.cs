@@ -27,6 +27,10 @@ namespace Msit66Site.Controllers
         {
             return View();
         }
+		public IActionResult First()
+		{
+			return View();
+		}
 
 		public IActionResult Privacy()
         {
