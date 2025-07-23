@@ -44,6 +44,24 @@
         })
 
         //滑鼠離開mouseout變回橘色
+         myH.addEventListener('mouseout',()=>{
+            myH.style.color = "orange";
+        })
+
+
+        setTimeout(function () {
+            console.log('A');
+            setTimeout(function () {
+                 console.log('B');
+                 setTimeout(function () {
+                    console.log('C');
+                 }, 1000);
+            }, 1000);
+        }, 1000);
+
+        
+
+        
 
     </script>
 }
