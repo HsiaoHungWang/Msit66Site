@@ -13,19 +13,52 @@
         //[] => 透過index讀資料 emps[1] =>{"name":"Jack","workYears":5,"salary":40000}
         //{} => emps[1] => 透過物件.屬性 讀資料 emps[1].name => Jack
 
-        console.log(emps[0]);   //{"name":"Tom","workYears":3,"salary":35000}
-        console.log(emps[0].name);//Tom
+        // console.log(emps[0]);   {"name":"Tom","workYears":3,"salary":35000}
+        // console.log(emps[0].name);Tom
+
+        //for(let i=0;i<emps.length;i++){}
+
+        // for(idx in emps){
+        //   console.log(emps[idx]);
+        // }
+        // for(emp of emps){
+        //    console.log(emp);
+        // }
+
+        //ES6 Array.method()
+        // emps.forEach((emp, index, arrs)=>{
+        //     console.log(arrs);
+        //     console.log(index);
+        //     console.log(emp);
+        // })
+
+       // ()=>{}
+         emps.forEach(emp => {
+             console.log(emp.name);
+              console.log(emp.workYears);
+             console.log(emp.salary);
+        })
+
+
+
+
 
         const emp = {"employees":[
                       {"name":"Tom","workYears":3,"salary":35000},
                       {"name":"Jack","workYears":5,"salary":40000},
                       {"name":"Mary","workYears":7,"salary":45000}
                    ]};
-        //emp => {} or [] emp.employees => []
-        //emp.employees =>  emp.employees[2] =>{"name":"Mary","workYears":7,"salary":45000}
-        //emp.employees[2].name => Mary
-         console.log(emp.employees[0]); //{"name":"Tom","workYears":3,"salary":35000
-         console.log(emp.employees[0].name); //Tom
+        // emp => {} or [] emp.employees => []
+        // emp.employees =>  emp.employees[2] =>{"name":"Mary","workYears":7,"salary":45000}
+        // emp.employees[2].name => Mary
+        //  console.log(emp.employees[0]); {"name":"Tom","workYears":3,"salary":35000
+        //  console.log(emp.employees[0].name); Tom
+
+        emp.employees.forEach(emp=>{
+              console.log(emp.name);
+               console.log(emp.workYears);
+              console.log(emp.salary);
+        })
     </script>
 }
 
