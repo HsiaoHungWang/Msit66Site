@@ -4,9 +4,16 @@
 }
 
 <h1>JsonDemo</h1>
+<ul id="ul1">
+   
+</ul>
+
+
 
 @section Scripts{
     <script>
+        const myUl = document.querySelector('#ul1');
+
         const emps = [{"name":"Tom","workYears":3,"salary":35000},
                      {"name":"Jack","workYears":5,"salary":40000},
                      {"name":"Mary","workYears":7,"salary":45000}];
@@ -33,32 +40,44 @@
         // })
 
        // ()=>{}
-         emps.forEach(emp => {
-             console.log(emp.name);
-              console.log(emp.workYears);
-             console.log(emp.salary);
+        const docFrag = document.createDocumentFragment();
+         emps.forEach(emp => {             
+             // console.log(emp.name);
+             //  console.log(emp.workYears);
+             // console.log(emp.salary);
+             //DOM
+              const txtName = document.createTextNode(emp.name + "," + emp.workYears);
+              const liName = document.createElement('li');
+              liName.appendChild(txtName); //<li>Name</li>
+              docFrag.appendChild(liName);
+
+             //這裡的寫法不好
+             //myUl.appendChild(liName);
+
         })
 
+         myUl.appendChild(docFrag);
+         
 
 
 
 
-        const emp = {"employees":[
-                      {"name":"Tom","workYears":3,"salary":35000},
-                      {"name":"Jack","workYears":5,"salary":40000},
-                      {"name":"Mary","workYears":7,"salary":45000}
-                   ]};
+        // const emp = {"employees":[
+        //               {"name":"Tom","workYears":3,"salary":35000},
+        //               {"name":"Jack","workYears":5,"salary":40000},
+        //               {"name":"Mary","workYears":7,"salary":45000}
+        //            ]};
         // emp => {} or [] emp.employees => []
         // emp.employees =>  emp.employees[2] =>{"name":"Mary","workYears":7,"salary":45000}
         // emp.employees[2].name => Mary
         //  console.log(emp.employees[0]); {"name":"Tom","workYears":3,"salary":35000
         //  console.log(emp.employees[0].name); Tom
 
-        emp.employees.forEach(emp=>{
-              console.log(emp.name);
-               console.log(emp.workYears);
-              console.log(emp.salary);
-        })
+        // emp.employees.forEach(emp=>{
+        //       console.log(emp.name);
+        //        console.log(emp.workYears);
+        //       console.log(emp.salary);
+        // })
     </script>
 }
 
