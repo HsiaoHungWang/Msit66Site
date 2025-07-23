@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <button id="button1">click</button>
+    <div id="div1"></div>
+</div>
+
+@section Scripts{
+    <script>
+        const btn = document.querySelector('#button1');
+        const myDiv = document.querySelector('#div1');
+        btn.addEventListener('click',()=>{
+            myDiv.innerHTML = "<h2>Hello JavaScript!!</h2>";
+        })
+
+    </script>
+}
+
+
