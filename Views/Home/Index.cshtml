@@ -2,6 +2,22 @@
     ViewData["Title"] = "Home Page";
 }
 
+@section Styles{
+    <style>
+        h1 {
+            color: orange
+        }
+
+        h2 {
+            color: gray
+        }
+
+     
+    </style>
+}
+
+
+
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
@@ -11,11 +27,23 @@
 
 @section Scripts{
     <script>
+        //step1 要控制哪一個標籤就先找到那個標籤 querySelector('css selectors')
         const btn = document.querySelector('#button1');
         const myDiv = document.querySelector('#div1');
+        const myH = document.querySelector('.display-4');
+
+
+        //step2 甚麼時候
         btn.addEventListener('click',()=>{
+            //step3 要做甚麼事
             myDiv.innerHTML = "<h2>Hello JavaScript!!</h2>";
         })
+
+        myH.addEventListener('mouseover',()=>{
+            myH.style.color = "purple";
+        })
+
+        //滑鼠離開mouseout變回橘色
 
     </script>
 }
