@@ -17,6 +17,14 @@
             //step3 串接API
             //alert('click')
             console.log(fetch(apiUrl));
+            fetch(apiUrl)
+               .then(Response=>{
+                  console.log(Response);
+                  return Response.text(); //取出Response body 中的文字資料會封裝在Promise物件中
+               })
+               .then(data =>{
+                  divMsg.textContent = data;
+               })
 
         })
     </script>
