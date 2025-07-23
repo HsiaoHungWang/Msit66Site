@@ -4,6 +4,18 @@
 }
 
 <h1>JsonDemo</h1>
+<table id="table1" class="table table-bordered">
+    <thead>
+        <tr>
+            <th>姓名</th>
+            <th>年資</th>
+            <th>薪水</th>
+        </tr>
+    </thead>
+    <tbody>
+      
+    </tbody>
+</table>
 <ul id="ul1">
    
 </ul>
@@ -13,6 +25,7 @@
 @section Scripts{
     <script>
         const myUl = document.querySelector('#ul1');
+        const myTb = document.querySelector('#table1>tbody');
 
         const emps = [{"name":"Tom","workYears":3,"salary":35000},
                      {"name":"Jack","workYears":5,"salary":40000},
@@ -40,24 +53,39 @@
         // })
 
        // ()=>{}
-        const docFrag = document.createDocumentFragment();
-         emps.forEach(emp => {             
-             // console.log(emp.name);
-             //  console.log(emp.workYears);
-             // console.log(emp.salary);
-             //DOM
-              const txtName = document.createTextNode(emp.name + "," + emp.workYears);
-              const liName = document.createElement('li');
-              liName.appendChild(txtName); //<li>Name</li>
-              docFrag.appendChild(liName);
+        // const docFrag = document.createDocumentFragment();
+        //  emps.forEach(emp => {             
+        //      // console.log(emp.name);
+        //      //  console.log(emp.workYears);
+        //      // console.log(emp.salary);
+        //      //DOM
+        //       const txtName = document.createTextNode(emp.name + "," + emp.workYears);
+        //       const liName = document.createElement('li');
+        //       liName.appendChild(txtName); //<li>Name</li>
+        //       docFrag.appendChild(liName);
 
-             //這裡的寫法不好
-             //myUl.appendChild(liName);
+        //      //這裡的寫法不好
+        //      //myUl.appendChild(liName);
 
+        // })
+
+        //  myUl.appendChild(docFrag);
+         
+
+        const datas = emps.map(employee=>{
+            //解構賦值
+            const {name, workYears, salary} = employee;
+            return(
+                 `<tr>
+                  <td>${name}</td>
+                  <td>${workYears}</td>
+                  <td>${salary}</td>
+                </tr>
+                 `
+            )
         })
 
-         myUl.appendChild(docFrag);
-         
+         myTb.innerHTML = datas.join('');
 
 
 
