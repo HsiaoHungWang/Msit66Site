@@ -17,6 +17,7 @@
         const imgLoading = document.querySelector('#img1');
         let abortController;
         const apiUrl = 'https://localhost:7194/api/First/text';
+        //https://localhost:7194/api/First/text?age=30&name=Jack
    
 
         btnStart.addEventListener('click', async ()=>{
@@ -30,7 +31,7 @@
             try{
                 abortController = new AbortController();
                 const signal = abortController.signal;
-                const response = await fetch(apiUrl,{signal});
+                const response = await fetch(`${apiUrl}?age=31&name=Mary`,{signal});
 
                 const data = await response.text();
                 if(!response.ok){
