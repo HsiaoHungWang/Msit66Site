@@ -5,15 +5,17 @@
 
 <h1>First Ajax</h1>
 <button id="buttonStart" class="btn btn-primary">Ajax 開始</button>
+<button id="buttonStop" class="btn btn-warning">Ajax 停止</button>
 <img src="~/images/loading.gif" id="img1" alt="loading" style="display:none" />
 <div id="divMessage"></div>
 
 @section Scripts{
     <script>
         const btnStart = document.querySelector('#buttonStart');
+        const btnStop = document.querySelector('#buttonStop');
         const divMsg = document.querySelector('#divMessage');
         const imgLoading = document.querySelector('#img1');
-
+        let abortController;
         const apiUrl = 'https://localhost:7194/api/First/text';
    
 
@@ -26,14 +28,21 @@
             btnStart.setAttribute('disabled','disabled');
 
             try{
-                const response = await fetch(apiUrl);
+                abortController = new AbortController();
+                const signal = abortController.signal;
+                const response = await fetch(apiUrl,{signal});
+
                 const data = await response.text();
                 if(!response.ok){
                     throw new Error(`${response.status}：${response.statusText}`)
                 }
                 divMsg.textContent = data;
             }catch(error){
-                divMsg.textContent = error.message;
+                let message = error.message;
+                if(error.name === 'AbortError'){
+                    message = "您停止了程式的執行";
+                }
+                divMsg.textContent = message;
             }finally{
                  //隱藏執行中的圖片
                 imgLoading.style.display = 'none';
@@ -63,6 +72,13 @@
             //    .then(_data => divMsg.textContent = _data);
                
 
+        })
+
+        btnStop.addEventListener('click',()=>{
+            //停止Ajax程式
+            if(abortController){
+                abortController.abort();
+            }
         })
     </script>
 }
