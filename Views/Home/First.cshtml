@@ -5,17 +5,25 @@
 
 <h1>First Ajax</h1>
 <button id="buttonStart" class="btn btn-primary">Ajax 開始</button>
+<img src="~/images/loading.gif" id="img1" alt="loading" style="display:none" />
 <div id="divMessage"></div>
 
 @section Scripts{
     <script>
         const btnStart = document.querySelector('#buttonStart');
         const divMsg = document.querySelector('#divMessage');
+        const imgLoading = document.querySelector('#img1');
+
         const apiUrl = 'https://localhost:7194/api/First/text';
    
 
         btnStart.addEventListener('click', async ()=>{
             //step3 串接API
+            //顯示執行中的圖片
+            imgLoading.style.display = 'inline';
+
+            //停用按鈕
+            btnStart.setAttribute('disabled','disabled');
 
             try{
                 const response = await fetch(apiUrl);
@@ -27,7 +35,10 @@
             }catch(error){
                 divMsg.textContent = error.message;
             }finally{
-
+                 //隱藏執行中的圖片
+                imgLoading.style.display = 'none';
+                 //啟用按鈕
+                 btnStart.removeAttribute('disabled');
             }
             
 
