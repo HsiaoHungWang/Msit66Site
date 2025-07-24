@@ -12,19 +12,45 @@
         const btnStart = document.querySelector('#buttonStart');
         const divMsg = document.querySelector('#divMessage');
         const apiUrl = 'https://localhost:7194/api/First/text';
+   
 
-        btnStart.addEventListener('click',()=>{
+        btnStart.addEventListener('click', async ()=>{
             //step3 串接API
+
+            try{
+                const response = await fetch(apiUrl);
+                const data = await response.text();
+                if(!response.ok){
+                    throw new Error(`${response.status}：${response.statusText}`)
+                }
+                divMsg.textContent = data;
+            }catch(error){
+                divMsg.textContent = error.message;
+            }finally{
+
+            }
+            
+
+
+
+
+
+
             //alert('click')
-            console.log(fetch(apiUrl));
-            fetch(apiUrl)
-               .then(Response=>{
-                  console.log(Response);
-                  return Response.text(); //取出Response body 中的文字資料會封裝在Promise物件中
-               })
-               .then(data =>{
-                  divMsg.textContent = data;
-               })
+            // console.log(fetch(apiUrl));
+            // fetch(apiUrl)
+            //    .then(Response=>{
+            //       console.log(Response);
+            //       return Response.text(); 取出Response body 中的文字資料會封裝在Promise物件中
+            //    })
+            //    .then(data =>{
+            //       divMsg.textContent = data;
+            //    })
+
+            // fetch(apiUrl)
+            //    .then(Response => Response.text())
+            //    .then(_data => divMsg.textContent = _data);
+               
 
         })
     </script>
