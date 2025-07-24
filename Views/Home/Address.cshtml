@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewData["Title"] = "Address";
+}
+
+<h1>Address</h1>
+<select id="selectCity"></select>
+<div id="divAddress"></div>
+
+@section Scripts{
+    <script>
+        const selCity = document.querySelector('#selectCity');
+        const apiUrl = 'https://localhost:7194/api/Address/city';
+
+        //async => function前
+        //await => promise物件前
+
+        //IIFE 立即執行函式
+        (async()=>{
+            //串接API            
+            const response = await fetch(apiUrl);
+            const datas = await response.json();
+            //讀出資料、顯示資料
+            //console.log(datas);
+            const cities = datas.map(city=>{
+                return(`
+                   <option>${city}</option>
+                `)
+            });
+            selCity.innerHTML = cities.join('');
+
+        })();
+
+        //todo 選到不同的程式把城市名稱顯示在div中
+
+        // const loadCity = async()=>{
+        //     串接API
+        // }
+
+        // loadCity();
+
+    </script>
+}
+
+
+
