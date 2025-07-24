@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewData["Title"] = "Show";
+}
+
+<h1>Show</h1>
+<img style="width:50%" id="img1" />
+
+@section Scripts{
+    <script>
+        const myImg = document.querySelector('#img1');
+        const apiUrl = 'https://localhost:7194/api/First/image/5';
+
+        (async()=>{
+            const response = await fetch(apiUrl);
+            const datas = await response.blob();
+
+            myImg.src = URL.createObjectURL(datas);
+        
+        })();
+
+    </script>
+}
+
