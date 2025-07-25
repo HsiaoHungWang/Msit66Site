@@ -5,7 +5,23 @@
 
 <h1>Member</h1>
 <div class="row">
-    <div class="col-9">會員清單</div>
+    <div class="col-9">
+        <h3 class="text-center">會員清單</h3>
+        <table id="tableMember" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>姓名</th>
+                    <th>Email</th>
+                    <th>年紀</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+    </div>
     <div class="col-3">
         <h3 class="text-center">會員新增</h3>
         <form id="memberForm">
@@ -44,7 +60,40 @@
     <script>
         const btnSubmit = document.querySelector('#buttonSubmit');
         const frmMember = document.querySelector('#memberForm');
-        const apiUrl = 'https://localhost:7194/api/members';
+        const tbMember = document.querySelector('#tableMember>tbody');
+        const apiUrl = 'https://localhost:7194/api/members'; 
+
+        //會員資料讀取
+        const loadMembers = async()=>{
+           const response = await fetch(apiUrl);
+           const datas = await response.json();
+
+           const rows = datas.map(member=>{
+               const {memberId, name, email, age, fileName} = member;
+               return(
+                   `
+                   <tr>
+                      <td><img src="https://localhost:7194/avatars/${fileName}" style="width:80px" /> </td>
+                      <td>${name}</td>
+                      <td>${email}</td>
+                      <td>${age}</td>
+                      <td>
+                         <button type="button" class="btn btn-primary">修改</button>
+                         <button type="button" class="btn btn-danger">刪除</button>
+                      </td>
+                   </tr>                   
+                   
+                   `
+               )
+           })
+
+           tbMember.innerHTML = rows.join('');
+
+        }
+        loadMembers();
+
+
+        //會員新增
         btnSubmit.addEventListener('click',async(event)=>{
           event.preventDefault(); //停止Submit行為
 
