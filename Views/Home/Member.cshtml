@@ -193,6 +193,10 @@
             if(response.ok){
                 alert('修改成功');
                 loadMembers();
+                //關閉Modal
+                const editModeal = document.querySelector('#editMemberModal');
+                const modelInstance = window.bootstrap.Modal.getInstance(editModeal);
+                modelInstance.hide();
             }
             
 
