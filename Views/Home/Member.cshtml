@@ -55,7 +55,42 @@
 
     </div>
 </div>
+<div class="modal fade" id="editMemberModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">會員修改</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="memberEditForm">
+                    <div class="mb-3">
+                         <input type="hidden" id="InputId1" name="memberId" />
+                        <label for="InputName" class="form-label">姓名</label>
+                        <input type="text" class="form-control" id="InputName1" name="name">
+                        <div id="nameHelp" class="form-text"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="InputEmail" class="form-label">電子郵件</label>
+                        <input type="email" class="form-control" id="InputEmail1" name="email">
+                    </div>                 
+                  
+                    <div class="mb-3">
+                        <label for="InputAge" class="form-label">年紀</label>
+                        <input type="number" class="form-control" id="InputAge1" name="age">
+                    </div>
+                  
+                   
+                </form>
 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="updateMember()">修改</button>
+            </div>
+        </div>
+    </div>
+</div>
 @section Scripts{
     <script>
         const btnSubmit = document.querySelector('#buttonSubmit');
@@ -78,7 +113,8 @@
                       <td>${email}</td>
                       <td>${age}</td>
                       <td>
-                         <button type="button" class="btn btn-primary">修改</button>
+                      <button type="button" class="btn btn-primary" onclick='editMember(${JSON.stringify(member)})' data-bs-toggle="modal" data-bs-target="#editMemberModal">     <i class="bi bi-pencil-fill"></i>
+        </button>
                          <button type="button" class="btn btn-danger" onclick="deleteMember(${memberId})"><i class="bi bi-trash3-fill"></i></button>
                       </td>
                    </tr>                   
@@ -125,6 +161,41 @@
                 alert('刪除成功');
                 loadMembers();
             }
+        }
+
+        //會員編輯
+        const editMember = (member)=>{
+            // console.log(member);
+            document.querySelector('#InputId1').value = member.memberId;
+            document.querySelector('#InputName1').value = member.name;
+            document.querySelector('#InputEmail1').value = member.email;
+            document.querySelector('#InputAge1').value = member.age;
+        }
+        //會員修改
+        const updateMember = async()=>{
+            const editFrm = document.querySelector('#memberEditForm')
+            const formData = new FormData(editFrm);
+
+            //轉成JSON
+            const member = {};
+            formData.forEach((value, key)=>{
+                member[key] = value;
+            })
+
+            const response = await fetch(`${apiUrl}/${member.memberId}`,{
+                method:'PUT',
+                body:JSON.stringify(member),
+                headers:{
+                    'Content-Type':'application/json'
+                }
+            })
+
+            if(response.ok){
+                alert('修改成功');
+                loadMembers();
+            }
+            
+
         }
            
      </script>
