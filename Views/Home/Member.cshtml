@@ -7,8 +7,8 @@
 <div class="row">
     <div class="col-9">會員清單</div>
     <div class="col-3">
-        <h3>會員新增</h3>
-        <form>
+        <h3 class="text-center">會員新增</h3>
+        <form id="memberForm">
             <div class="mb-3">
                 <label for="InputName" class="form-label">姓名</label>
                 <input type="text" class="form-control" id="InputName" name="name">
@@ -34,9 +34,34 @@
                 <label for="formFile" class="form-label">頭像</label>
                 <input class="form-control" type="file" id="formFile" name="file">
             </div>
-            <button type="submit" class="btn btn-primary">註冊</button>
+            <button type="submit" class="btn btn-primary" id="buttonSubmit">註冊</button>
         </form>
 
     </div>
 </div>
+
+@section Scripts{
+    <script>
+        const btnSubmit = document.querySelector('#buttonSubmit');
+        const frmMember = document.querySelector('#memberForm');
+        const apiUrl = 'https://localhost:7194/api/members';
+        btnSubmit.addEventListener('click',async(event)=>{
+          event.preventDefault(); //停止Submit行為
+
+          const formData = new FormData(frmMember);
+
+          const response = await fetch(apiUrl,{
+              method:'POST',
+              body:formData
+          });
+
+          if(response.ok){
+              alert('新增成功');
+          }
+
+
+
+        })
+    </script>
+}
 
