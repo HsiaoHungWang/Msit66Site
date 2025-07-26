@@ -19,63 +19,68 @@
 <ul id="ul1">
    
 </ul>
-<div class="row row-cols-1 row-cols-md-3 g-4">
-    <div class="col">
-        <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-            <div class="card-footer">
-                <small class="text-body-secondary">Last updated 3 mins ago</small>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-            <div class="card-footer">
-                <small class="text-body-secondary">Last updated 3 mins ago</small>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-            </div>
-            <div class="card-footer">
-                <small class="text-body-secondary">Last updated 3 mins ago</small>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-            <div class="card-footer">
-                <small class="text-body-secondary">Last updated 3 mins ago</small>
-            </div>
-        </div>
-    </div>
+<div id="divCard" class="row row-cols-1 row-cols-md-3 g-4">
+   
 </div>
 
 
 @section Scripts{
     <script src="~/js/travel.js"></script>
     <script>
-           const travel = spots.CommonFormat.Section;
-            console.log(travel);
+           const travelCard = document.querySelector('#divCard');
+           const travels = spots.CommonFormat.Section;
+           // console.log(travels);
+
+           const cards = travels.map(travel=>{
+
+                      const imgs = travel.file.img;
+                      let imgUrl;
+                      let imgAlt;
+                if(Array.isArray(imgs)){
+                     imgAlt = imgs[0]["@@description"];
+                   imgUrl = imgs[0].text;
+               }else{
+                    imgAlt=imgs["@@description"];
+                    imgUrl =imgs.text;
+               }
+           
+              return(
+                  `
+                       <div class="col">
+            <div class="card">
+                <img src="${imgUrl}" class="card-img-top" alt="${imgAlt}">
+                <div class="card-body">
+                     <h5 class="card-title">${travel.stitle}</h5>
+                    <p class="card-text">${travel.xbody.substring(0,100)}...</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-body-secondary">${travel.address}</small>
+                </div>
+            </div>
+        </div>
+                  
+                  `
+              )
+           
+           });
+
+
+            travelCard.innerHTML = cards.join('');
+
+           // travels.forEach(travel=>{
+           //    const imgs = travel.file.img;
+           //     if(Array.isArray(imgs)){
+           //          console.log(imgs[0]["@@description"]);
+           //        console.log(imgs[0].text);
+           //    }else{
+           //         console.log(imgs["@@description"]);
+           //        console.log(imgs.text);
+           //    }
+           // })
+
+
+
+          
         const myUl = document.querySelector('#ul1');
         const myTb = document.querySelector('#table1>tbody');
 
